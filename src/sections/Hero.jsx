@@ -26,6 +26,7 @@ export default function Hero() {
   const [roleIdx, setRoleIdx] = useState(0)
   const [displayed, setDisplayed] = useState('')
   const [typing, setTyping] = useState(true)
+  const [isLg, setIsLg] = useState(false)
   const { ref: heroRef, inView: heroInView } = useInView()
   const heroInViewRef = useRef(true)
   const canvasRef = useRef(null)
@@ -44,6 +45,14 @@ export default function Hero() {
     if (orbRef3.current) {
       gsap.to(orbRef3.current, { y: -20, x: 15, duration: 6, repeat: -1, yoyo: true, ease: 'sine.inOut', delay: 1 })
     }
+  }, [])
+
+  // Window size check for Robot
+  useEffect(() => {
+    const checkSize = () => setIsLg(window.innerWidth >= 1024)
+    checkSize()
+    window.addEventListener('resize', checkSize)
+    return () => window.removeEventListener('resize', checkSize)
   }, [])
 
   // Particle canvas
@@ -233,7 +242,7 @@ export default function Hero() {
             transition={{ duration: 1, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
             className="flex-shrink-0 hidden lg:flex items-center justify-center"
           >
-            <Robot />
+            {isLg && <Robot />}
           </motion.div>
 
         </div>

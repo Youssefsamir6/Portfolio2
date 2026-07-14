@@ -17,7 +17,7 @@ export const personalInfo = {
   phoneDisplay: "+20 109 526 2732",
   linkedin: "https://www.linkedin.com/in/youssef-samir-6b12b132a",
   github: "https://github.com/Youssefsamir6",
-  cv: "/Youssef_Samir_Refky_CV.pdf",
+  cv: "./Youssef_Samir_Refky_CV.pdf",
   cvFilename: "Youssef_Samir_Refky_CV.pdf",
   learning: ["TypeScript", "Docker", "System Design"],
   stats: [
@@ -155,19 +155,19 @@ export const certificates = [
   {
     name: "Creative and Innovative Thinking Skills in the Age of AI",
     issuer: "NEOMI",
-    link: "/neomi_cert.jpeg",
-    image: "/neomi_cert.jpeg",
+    link: "./neomi_cert.jpeg",
+    image: "./neomi_cert.jpeg",
   },
   {
     name: "Cybersecurity Defense Analyst Career Path",
     issuer: "Cisco",
-    link: "/cybersecurity_cert.pdf",
-    image: "/cybersecurity_cert_cover.jpg",
+    link: "./cybersecurity_cert.pdf",
+    image: "./cybersecurity_cert_cover.jpg",
   },
   {
     name: "JavaScript Essentials 1",
     issuer: "Cisco",
-    link: "/javascript_cert.pdf",
-    image: "/javascript_cert.png",
+    link: "./javascript_cert.pdf",
+    image: "./javascript_cert.png",
   },
 ]
