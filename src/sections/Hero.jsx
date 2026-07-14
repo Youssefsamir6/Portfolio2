@@ -3,7 +3,6 @@ import { motion } from 'framer-motion'
 import { gsap } from 'gsap'
 import { useInView } from 'react-intersection-observer'
 import { personalInfo } from '../data/portfolio'
-import Robot from '../components/Robot'
 
 const DownloadIcon = () => (
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="w-4 h-4">
@@ -26,7 +25,6 @@ export default function Hero() {
   const [roleIdx, setRoleIdx] = useState(0)
   const [displayed, setDisplayed] = useState('')
   const [typing, setTyping] = useState(true)
-  const [isLg, setIsLg] = useState(false)
   const { ref: heroRef, inView: heroInView } = useInView()
   const heroInViewRef = useRef(true)
   const canvasRef = useRef(null)
@@ -45,14 +43,6 @@ export default function Hero() {
     if (orbRef3.current) {
       gsap.to(orbRef3.current, { y: -20, x: 15, duration: 6, repeat: -1, yoyo: true, ease: 'sine.inOut', delay: 1 })
     }
-  }, [])
-
-  // Window size check for Robot
-  useEffect(() => {
-    const checkSize = () => setIsLg(window.innerWidth >= 1024)
-    checkSize()
-    window.addEventListener('resize', checkSize)
-    return () => window.removeEventListener('resize', checkSize)
   }, [])
 
   // Particle canvas
@@ -235,14 +225,14 @@ export default function Hero() {
             </motion.div>
           </div>
 
-          {/* Right: Robot */}
+          {/* Right: Empty space for now (Spline removed) */}
           <motion.div
             initial={{ opacity: 0, x: 60 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 1, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
             className="flex-shrink-0 hidden lg:flex items-center justify-center"
           >
-            {isLg && <Robot />}
+            {/* Robot placeholder */}
           </motion.div>
 
         </div>
