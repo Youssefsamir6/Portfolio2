@@ -26,6 +26,8 @@ export default function Hero() {
   const [roleIdx, setRoleIdx] = useState(0)
   const [displayed, setDisplayed] = useState('')
   const [typing, setTyping] = useState(true)
+  const { ref: heroRef, inView: heroInView } = useInView()
+  const heroInViewRef = useRef(true)
   const canvasRef = useRef(null)
   const orbRef1 = useRef(null)
   const orbRef2 = useRef(null)
@@ -71,19 +73,22 @@ export default function Hero() {
     }
 
     const draw = () => {
-      ctx.clearRect(0, 0, canvas.width, canvas.height)
-      particles.forEach(p => {
-        p.x += p.vx
-        p.y += p.vy
-        if (p.x < 0) p.x = canvas.width
-        if (p.x > canvas.width) p.x = 0
-        if (p.y < 0) p.y = canvas.height
-        if (p.y > canvas.height) p.y = 0
-        ctx.beginPath()
-        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2)
-        ctx.fillStyle = `rgba(255,255,255,${p.alpha})`
-        ctx.fill()
-      })
+      heroInViewRef.current = heroInView
+      if (heroInViewRef.current) {
+        ctx.clearRect(0, 0, canvas.width, canvas.height)
+        particles.forEach(p => {
+          p.x += p.vx
+          p.y += p.vy
+          if (p.x < 0) p.x = canvas.width
+          if (p.x > canvas.width) p.x = 0
+          if (p.y < 0) p.y = canvas.height
+          if (p.y > canvas.height) p.y = 0
+          ctx.beginPath()
+          ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2)
+          ctx.fillStyle = `rgba(255,255,255,${p.alpha})`
+          ctx.fill()
+        })
+      }
       animId = requestAnimationFrame(draw)
     }
     draw()
@@ -117,7 +122,7 @@ export default function Hero() {
   const scrollDown = () => document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' })
 
   return (
-    <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden bg-black">
+    <section ref={heroRef} id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden bg-black">
       {/* Particles */}
       <canvas ref={canvasRef} className="absolute inset-0 w-full h-full pointer-events-none" />
 
